@@ -1,98 +1,102 @@
-/*
-#include <iostream>
+п»ї/*#include <iostream>
 using namespace std;
 
-int cm(int N, int X, int Y) {
-    return (N / X) + (N / Y) - (N / (X * Y));
-}
+/*int main() {
+    int x, original, i, count = 0;
+    cin >> x;
+    original = x;
 
-int main() {
-    int N, X, Y;
-    cin >> N >> X >> Y;
-    cout << cm(N - 1, X, Y) << endl;
+    while (x > 0) {
+        i = x % 10;
+        if (i != 0 && original % i == 0) {
+            count += 1;
+        }
+        x /= 10;
+    }
 
-    return 0;
-}
-*/
-/*
-#include <iostream>
-using namespace std;
-
-int main() {
-    setlocale(LC_ALL, "Russian");
-    int a, b, c;
-    cin >> a >> b >> c;
-
-    // Проверка на существование треугольника (неравенство треугольника)
-    if (a + b > c && a + c > b && b + c > a) {
-        int a2 = a * a, b2 = b * b, c2 = c * c;
-
-        // выполняется теорема Пифагора
-        if (a2 + b2 == c2 || a2 + c2 == b2 || b2 + c2 == a2)
-            cout << "Треугольник прямоугольный" << endl;
-        //cумма квадратов двух сторон больше, чем квадрат третьей стороны
-        else if (a2 + b2 > c2 && a2 + c2 > b2 && b2 + c2 > a2)
-            cout << "Треугольник остроугольный" << endl;
-        else
-            cout << "Треугольник тупоугольный" << endl;
+    if (count > 0) {
+        cout << "Yes";
     }
     else {
-        cout << "Невозможно построить треугольник с такими сторонами." << endl;
+        cout << "No";
     }
 
     return 0;
 }
+
 */
-/*#include <iostream>
+/*int main() {
+    int chislo, chislo_zap;
+    cin >> chislo;
+    int k = 9;
+    int a = 0;
+    while (k != -1) {
+        chislo_zap = chislo;
+        while (chislo_zap > 0) {
+            if (chislo_zap % 10 == k) {
+                a += k;
+                a *= 10;
+            }
+            chislo_zap /= 10;
+        }
+        k -= 1;
+    }
+    a /= 10;
+    cout << a;
+} 
+*/
+#include <iostream>
 #include <cmath>
 
 using namespace std;
 
-bool area(double x, double y) {
-    if (x >= 0 && y >= 0) {
-        if (pow(x, 2) + pow(y, 2) <= 4) {
-            return true;
+const int MAX_N = 100; 
+const int MAX_M = 100; 
+
+int main() {
+    setlocale(LC_ALL, "RU");
+    int n, m, q, X[MAX_N], Y[MAX_M];
+
+    cout << "Р’РІРµРґРёС‚Рµ СЂР°Р·РјРµСЂ РјР°СЃСЃРёРІР° X: ";
+    cin >> n;
+    cout << "Р’РІРµРґРёС‚Рµ СЂР°Р·РјРµСЂ РјР°СЃСЃРёРІР° Y: ";
+    cin >> m;
+    cout << "Р’РІРµРґРёС‚Рµ Р·РЅР°С‡РµРЅРёРµ q: ";
+    cin >> q;
+
+    
+    
+
+    // Р’РІРѕРґ СЌР»РµРјРµРЅС‚РѕРІ РјР°СЃСЃРёРІР° X
+    cout << "Р’РІРµРґРёС‚Рµ СЌР»РµРјРµРЅС‚С‹ РјР°СЃСЃРёРІР° X: ";
+    for (int i = 0; i < n; i++) {
+        cin >> X[i];
+    }
+
+    // Р’РІРѕРґ СЌР»РµРјРµРЅС‚РѕРІ РјР°СЃСЃРёРІР° Y
+    cout << "Р’РІРµРґРёС‚Рµ СЌР»РµРјРµРЅС‚С‹ РјР°СЃСЃРёРІР° Y: ";
+    for (int i = 0; i < m; i++) {
+        cin >> Y[i];
+    }
+
+    int naibolsh_i = 0, naibolsh_j = 0, naibolsh_sum = X[0] + Y[0];
+
+    // РџРµСЂРµР±РёСЂР°РµРј РІСЃРµ СЌР»РµРјРµРЅС‚С‹
+    for (int i = 0; i < n; i++) {
+        for (int j = 0; j < m; j++) {
+            int sum = X[i] + Y[j]; 
+            //РµСЃР»Рё СЃСѓРјРјР° СЌР»-С‚РѕРІ - Р·Р°РґР°РЅРЅРѕРµ С‡РёСЃР»Рѕ <= РЅР°РёР±РѕР»СЊС€РµР№ СЃСѓРјРјС‹ - Р·Р°РґР°РЅРЅРѕРµ С‡РёСЃР»Рѕ
+            if (abs(sum - q) <= abs(naibolsh_sum - q)) {
+                naibolsh_sum = sum;
+                naibolsh_i = i;
+                naibolsh_j = j;
+            }
         }
     }
 
-    if (x <= 0 && y <= 0 && x >= -2 && y >= -2 && y >= -x - 2) {
-        return true;
-    }
-
-    return false;
-}
-
-int main() {
-    setlocale(LC_ALL, "Russian");
-    double x, y;
-    cin >> x >> y;
-    if (area(x, y)) {
-        cout << "Точка входит в область." << endl;
-    }
-    else {
-        cout << "Точка не входит в область." << endl;
-    }
+    // Р’С‹РІРѕРґРёРј РёРЅРґРµРєСЃС‹
+    cout << "РРЅРґРµРєСЃС‹: i = " << naibolsh_i << ", j = " << naibolsh_j << endl;
 
     return 0;
 }
-*/
-/*#include <iostream>
-#include <cmath>
-using namespace std;
 
-double main() {
-    double a, r;
-    cin >> a > r;
-    if (r <= sqrt(a) / 2){
-        
-        return 0;
-    }
-
-
-}
-*/
-#include <iostream>
-using namespace std;
-int main() {
-    
-}
