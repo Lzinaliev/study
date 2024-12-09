@@ -1,0 +1,9 @@
+firstName lastName   age city      ID
+Thomas    Shelby     20  Rio       400
+Omega     Night      45  Ontario   600
+Wood      Tinker     54  Lisbon    N/A
+Giorgos   Georgiou   25  London    300
+Timmy     Turner     32  Berlin    N/A
+
+awk '/^A/ {print NR, $0}' information.txt
+
