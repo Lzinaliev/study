@@ -7,3 +7,4 @@ Timmy     Turner     32  Berlin    N/A
 
 awk '/^A/ {print NR, $0}' information.txt
 
+awk '$3 > 25 {print $1, $2}' information.txt
